@@ -4,3 +4,4 @@
 
 # unnecessary, possibly also slow
 #c.JupyterHub.internal_ssl = True
+c.Spawner.default_url = '/lab'
