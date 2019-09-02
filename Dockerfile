@@ -4,9 +4,9 @@ LABEL com.jupyter.source="https://hub.docker.com/r/jupyterhub/jupyterhub/dockerf
 LABEL com.jupyter.date="2019-07-01"
 LABEL org.jupyter.service="jupyterhub"
 
-RUN apt-get -yqq update && apt-get -yqq upgrade && apt-get -yqq install \
-  wget git bzip2 \
-  && apt-get purge && apt-get clean && rm -rf /var/lib/apt/lists/*
+#RUN apt-get -yqq update && apt-get -yqq upgrade && apt-get -yqq install \
+#  wget git bzip2 \
+#  && apt-get purge && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ensure Python is installed with conda
 RUN which conda || ( \
@@ -30,7 +30,7 @@ RUN /conda.sh install -y -c conda-forge \
   && /conda.sh install -y -c conda-forge notebook jupyterlab \
   && /conda.sh clean -a -y
 
-RUN /conda.sh path_exec pip install --no-cache-dir -U jupyterhub
+ RUN /conda.sh path_exec pip install --no-cache-dir -U jupyterhub
 
 RUN mkdir -p /srv/jupyterhub/
 WORKDIR /srv/jupyterhub/
@@ -52,16 +52,16 @@ RUN [ -f apt.txt ] && apt-get -yqq update \
   && rm null apt.txt \
   || rm null
 
-COPY src/env2conda.sh custom/environment*.yml ./
-RUN ./env2conda.sh /conda.sh environment*.yml \
-  && /conda.sh clean -a -y \
-  && rm -f env2conda.sh environment*.yml
+#   COPY src/env2conda.sh custom/environment*.yml ./
+#   RUN ./env2conda.sh /conda.sh environment*.yml \
+#     && /conda.sh clean -a -y \
+#     && rm -f env2conda.sh environment*.yml
 
-COPY src/null custom/requirements.tx[t] ./
-RUN [ -f requirements.txt ] \
-  && /conda.sh path_exec pip install --no-cache-dir -r requirements.txt \
-  && rm null requirements.txt \
-  || rm null
+#   COPY src/null custom/requirements.tx[t] ./
+#   RUN [ -f requirements.txt ] \
+#     && /conda.sh path_exec pip install --no-cache-dir -r requirements.txt \
+#     && rm null requirements.txt \
+#     || rm null
 
 # list of users
 ARG GROUP_ID=1000
