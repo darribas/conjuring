@@ -21,16 +21,15 @@ RUN which conda || ( \
 COPY src/conda.sh /
 
 # install pip
-RUN /conda.sh install -c conda-forge -q -y pip \
- && /conda.sh path_exec pip install --no-cache-dir -U pip
+#   RUN /conda.sh install -c conda-forge -q -y pip \
+#    && /conda.sh path_exec pip install --no-cache-dir -U pip
 
 # install NodeJS and Jupyter with conda
-RUN /conda.sh install -y -c conda-forge \
-    sqlalchemy tornado jinja2 traitlets requests pip pycurl nodejs configurable-http-proxy \
-  && /conda.sh install -y -c conda-forge notebook jupyterlab \
-  && /conda.sh clean -a -y
+#       sqlalchemy tornado jinja2 traitlets requests pip pycurl nodejs configurable-http-proxy \
+#     && /conda.sh install -y -c conda-forge notebook jupyterlab \
+#     && /conda.sh clean -a -y
 
- RUN /conda.sh path_exec pip install --no-cache-dir -U jupyterhub
+#RUN /conda.sh path_exec pip install --no-cache-dir -U jupyterhub
 
 RUN mkdir -p /srv/jupyterhub/
 WORKDIR /srv/jupyterhub/
@@ -72,7 +71,7 @@ RUN chmod 400 /opt/users.csv  # keep it secret from container users
 
 # jupyterhub config
 COPY custom/srv/* ./
-#RUN /conda.sh path_exec jupyterhub --generate-certs  # internal_ssl unnecessary
+RUN /conda.sh path_exec jupyterhub --generate-certs  # internal_ssl unnecessary
 
 ENV DEBIAN_FRONTEND ''
 COPY src/cmd.sh /bin/
