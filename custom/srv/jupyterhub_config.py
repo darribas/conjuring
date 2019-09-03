@@ -5,3 +5,5 @@
 # unnecessary, possibly also slow
 #c.JupyterHub.internal_ssl = True
 c.Spawner.default_url = '/lab'
+# Admin users
+c.Authenticator.admin_users = {'admin'}
