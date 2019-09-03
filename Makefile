@@ -20,3 +20,9 @@ bash:
 	$(DCC) exec $(REPO) bash
 prune:
 	docker system prune
+provision:
+	rm -rf custom/home/* && \
+	wget https://github.com/rsbivand/ectqg19-workshop/raw/master/pack.zip && \
+	unzip pack.zip && \
+	cp -r pack custom/home_default/ && \
+	rm -r pack pack.zip
