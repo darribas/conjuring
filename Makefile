@@ -22,7 +22,8 @@ prune:
 	docker system prune
 provision:
 	rm -rf custom/home/* && \
+	rm -rf custom/home_default/* && \
 	wget https://github.com/rsbivand/ectqg19-workshop/raw/master/pack.zip && \
 	unzip pack.zip && \
-	cp -r pack custom/home_default/ && \
+	cp -r pack/* custom/home_default/ && \
 	rm -r pack pack.zip
