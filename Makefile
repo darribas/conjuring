@@ -27,3 +27,5 @@ provision:
 	unzip pack.zip && \
 	cp -r pack/* custom/home_default/ && \
 	rm -r pack pack.zip
+rmis:
+	docker rmi casperdcl/conjuring:latest casperdcl/conjuring:base casperdcl/conjuring:core
